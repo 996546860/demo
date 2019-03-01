@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+import javax.annotation.Resource;
+
+@Service(value="numberServicel")
 public class numberService {
 
-    @Autowired
+    @Resource
     private NumberDao numberDao;
 
     public int getNumber(){
