@@ -16,7 +16,9 @@ import java.security.GeneralSecurityException;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
 
-
+/**
+ * 发送邮件..
+ */
 @Component
 public class EmailUtils {
     private static final Logger logger = LoggerFactory.getLogger(EmailUtils.class);
