@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.springInteface;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.Nullable;
