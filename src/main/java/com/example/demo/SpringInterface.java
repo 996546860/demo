@@ -9,8 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-//@Configuration
-public class SpringInterface /*extends HandlerInterceptorAdapter */{
+/**
+ * spring 拦截器实现 连接URL
+ */
+@Configuration
+public class SpringInterface extends HandlerInterceptorAdapter {
 
 
     /**
@@ -29,22 +32,11 @@ public class SpringInterface /*extends HandlerInterceptorAdapter */{
      * @return
              * @throws Exception
      */
-    /*@Override
+    @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-       *//* System.out.println("getRequestURL="+request.getRequestURL());
-        System.out.println("getRequestURI="+request.getRequestURI());
-        System.out.println("getQueryString="+request.getQueryString());
-        System.out.println("getPathInfo="+request.getPathInfo());
-        System.out.println("getRemoteAddr="+request.getRemoteAddr());
-        System.out.println("getRemoteHost="+request.getRemoteHost());
-        System.out.println("getRemotePort="+request.getRemotePort());
-        System.out.println("getLocalAddr="+request.getLocalAddr());
-        System.out.println("getLocalName="+request.getLocalName());
-
-
-        System.out.println("拦截111");*//*
-        return true;
+        System.out.println("getRequestURL="+request.getRequestURL());
+                return true;
     }
 
 
@@ -52,12 +44,12 @@ public class SpringInterface /*extends HandlerInterceptorAdapter */{
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
                            @Nullable ModelAndView modelAndView) throws Exception {
-        //System.out.println("拦截222");
+
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler,
                                 @Nullable Exception ex) throws Exception {
-        //System.out.println("拦截333");
-    }*/
+
+    }
 }

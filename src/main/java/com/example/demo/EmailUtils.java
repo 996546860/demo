@@ -54,82 +54,8 @@ public class EmailUtils {
     private  static int a;
     static List<Integer> list = new ArrayList<>();
     static CountDownLatch latch = new CountDownLatch(3);
-    public static void main(String[] args) {
-        Lock lock = new ReentrantLock();
-
-        Condition c1 =  lock.newCondition();
-        Condition c2 = lock.newCondition();
 
 
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                add();
-                latch.countDown();
-            }
-        }).start();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                add2();
-                latch.countDown();
-            }
-        }).start();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                add2();
-                latch.countDown();
-            }
-        }).start();
-
-        try{
-            latch.await();
-        }catch (Exception e){
-            System.out.println(e);
-
-        }
-
-
-        try{
-            latch.await();
-        }catch (Exception e){
-            System.out.println(e);
-
-        }
-
-        System.out.println("原始"+list.size());
-        Set set =  new HashSet(list);
-        System.out.println(set.size());
-
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println("第"+i+" 个正在打印-->"+list.get(i));
-        }
-    }
-
-    public static void add(){
-        while  (true){
-            to();
-            if(a > 5000){
-                break;
-            }
-            //System.out.println(Thread.currentThread().getName()+" "+a);
-        }
-    }
-
-    public static void add2(){
-        while  (true){
-            to();
-            if(a > 5000){
-                break;
-            }
-            //System.out.println(Thread.currentThread().getName()+" "+a);
-        }
-    }
     public static synchronized void  to(){
         a++;
         list.add(a);
