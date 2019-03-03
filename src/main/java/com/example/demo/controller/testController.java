@@ -1,17 +1,36 @@
 package com.example.demo.controller;
 
+import com.example.demo.demo.User;
 import com.example.demo.demo.number;
+import com.example.demo.service.UserService;
 import com.example.demo.service.numberService;
 import com.example.demo.zookeeper.DistributedLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
 
 @Controller
 public class testController {
+    @Autowired
+    private UserService userService;
+
 
     @Autowired
     private numberService numberServicel;
+
+
+    @RequestMapping("/showUser")
+    @ResponseBody
+    public User toIndex(Model model){
+
+        User user = this.userService.getUserById(1);
+        return user;
+    }
+
 
     @RequestMapping("sendEmail")
     public String sendEmail() throws Exception {
