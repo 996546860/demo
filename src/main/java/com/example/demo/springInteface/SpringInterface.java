@@ -17,7 +17,7 @@ public class SpringInterface extends HandlerInterceptorAdapter {
 
 
     /**
-     *    getRequestURL方法返回客户端发出请求时的完整URL。
+     * getRequestURL方法返回客户端发出请求时的完整URL。
      * 　　getRequestURI方法返回请求行中的资源名部分。
      * 　　getQueryString 方法返回请求行中的参数部分。
      * 　　getPathInfo 方法返回请求URL中的额外路径信息。额外路径信息是请求URL中的位于Servlet的路径之后和查询参数之前的内容，它以“/”开头。
@@ -26,19 +26,19 @@ public class SpringInterface extends HandlerInterceptorAdapter {
      * 　　getRemotePort 方法返回客户机所使用的网络端口号。
      * 　　getLocalAddr 方法返回WEB服务器的IP地址。
      * 　　getLocalName 方法返回WEB服务器的主机名
+     *
      * @param request
      * @param response
      * @param handler
      * @return
-             * @throws Exception
+     * @throws Exception
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-        System.out.println("getRequestURL="+request.getRequestURL());
-                return true;
+        System.out.println("getRequestURL=" + request.getRequestURL());
+        return true;
     }
-
 
 
     @Override

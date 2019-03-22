@@ -94,8 +94,9 @@ class GetTradeData implements IGetBizData<Integer> {
     }
     List<Object> ll =  result.stream().filter(key -> Integer.valueOf(key) ==  55).collect(Collectors.toList());
     System.out.println(JSON.toJSONString(ll));
-*/
-    new Thread(()-> System.out.println(1)).start();
+    */
+    //new Thread(()-> System.out.println(1)).start();
+
   }
  
 }

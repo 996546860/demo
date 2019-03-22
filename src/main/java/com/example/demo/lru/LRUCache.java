@@ -9,20 +9,20 @@ public class LRUCache<K, V> {
 
     private int currentCacheSize;
     private int CacheCapcity;
-    private HashMap<K,CacheNode> caches;
+    private HashMap<K, CacheNode> caches;
     private CacheNode first;
     private CacheNode last;
 
-    public LRUCache(int size){
+    public LRUCache(int size) {
         currentCacheSize = 0;
         this.CacheCapcity = size;
-        caches = new HashMap<K,CacheNode>(size);
+        caches = new HashMap<K, CacheNode>(size);
     }
 
-    public void put(K k,V v){
+    public void put(K k, V v) {
         CacheNode node = caches.get(k);
-        if(node == null){
-            if(caches.size() >= CacheCapcity){
+        if (node == null) {
+            if (caches.size() >= CacheCapcity) {
 
                 caches.remove(last.key);
                 removeLast();
@@ -35,28 +35,28 @@ public class LRUCache<K, V> {
         caches.put(k, node);
     }
 
-    public Object  get(K k){
+    public Object get(K k) {
         CacheNode node = caches.get(k);
-        if(node == null){
+        if (node == null) {
             return null;
         }
         moveToFirst(node);
         return node.value;
     }
 
-    public Object remove(K k){
+    public Object remove(K k) {
         CacheNode node = caches.get(k);
-        if(node != null){
-            if(node.pre != null){
-                node.pre.next=node.next;
+        if (node != null) {
+            if (node.pre != null) {
+                node.pre.next = node.next;
             }
-            if(node.next != null){
-                node.next.pre=node.pre;
+            if (node.next != null) {
+                node.next.pre = node.pre;
             }
-            if(node == first){
+            if (node == first) {
                 first = node.next;
             }
-            if(node == last){
+            if (node == last) {
                 last = node.pre;
             }
         }
@@ -64,74 +64,75 @@ public class LRUCache<K, V> {
         return caches.remove(k);
     }
 
-    public void clear(){
+    public void clear() {
         first = null;
         last = null;
         caches.clear();
     }
 
 
-
-    private void moveToFirst(CacheNode node){
-        if(first == node){
+    private void moveToFirst(CacheNode node) {
+        if (first == node) {
             return;
         }
-        if(node.next != null){
+        if (node.next != null) {
             node.next.pre = node.pre;
         }
-        if(node.pre != null){
+        if (node.pre != null) {
             node.pre.next = node.next;
         }
-        if(node == last){
-            last= last.pre;
+        if (node == last) {
+            last = last.pre;
         }
-        if(first == null || last == null){
+        if (first == null || last == null) {
             first = last = node;
             return;
         }
 
-        node.next=first;
+        node.next = first;
         first.pre = node;
         first = node;
-        first.pre=null;
+        first.pre = null;
 
     }
 
-    private void removeLast(){
-        if(last != null){
+    private void removeLast() {
+        if (last != null) {
             last = last.pre;
-            if(last == null){
+            if (last == null) {
                 first = null;
-            }else{
+            } else {
                 last.next = null;
             }
         }
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         CacheNode node = first;
-        while(node != null){
-            sb.append(String.format("%s:%s ", node.key,node.value));
+        while (node != null) {
+            sb.append(String.format("%s:%s ", node.key, node.value));
             node = node.next;
         }
 
         return sb.toString();
     }
 
-    class CacheNode{
+    class CacheNode {
         CacheNode pre;
         CacheNode next;
         Object key;
         Object value;
-        public CacheNode(){
+
+        public CacheNode() {
 
         }
     }
 
     public static void main(String[] args) {
 
-        LRUCache<Integer,String> lru = new LRUCache<Integer,String>(3);
+        LRUCache<Integer, String> lru = new LRUCache<Integer, String>(3);
 
         lru.put(1, "a");    // 1:a
         System.out.println(lru.toString());

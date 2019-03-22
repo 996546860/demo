@@ -2,14 +2,14 @@ package com.example.demo.demo;
 
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+//import javax.persistence.Entity;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.Id;
+//import javax.persistence.Table;
 
-@Entity
+//@Entity
 @Component
-@Table(name = "bs_number")
+//@Table(name = "bs_number")
 public class number {
     public Integer getId() {
         return id;
@@ -19,8 +19,8 @@ public class number {
         this.id = id;
     }
 
-    @Id
-    @GeneratedValue
+    //@Id
+    //@GeneratedValue
     private Integer id;
 
     public Integer getNum() {
