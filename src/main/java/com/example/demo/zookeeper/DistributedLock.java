@@ -29,7 +29,8 @@ public class DistributedLock implements Lock, Watcher {
 
     /**
      * 配置分布式锁
-     * @param config 连接的url
+     *
+     * @param config   连接的url
      * @param lockName 竞争资源
      */
     public DistributedLock(String config, String lockName) {
@@ -170,10 +171,12 @@ public class DistributedLock implements Lock, Watcher {
 
     public class LockException extends RuntimeException {
         private static final long serialVersionUID = 1L;
-        public LockException(String e){
+
+        public LockException(String e) {
             super(e);
         }
-        public LockException(Exception e){
+
+        public LockException(Exception e) {
             super(e);
         }
     }

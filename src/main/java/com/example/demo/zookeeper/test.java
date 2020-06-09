@@ -19,7 +19,7 @@ public class test {
 
         }*/
 
-        new Thread(() ->{
+        new Thread(() -> {
             System.out.println(111);
         }).start();
         /*Runnable runnable = new Runnable() {

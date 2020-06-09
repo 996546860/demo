@@ -12,7 +12,7 @@ public class AnnotationExample {
     }
 
     @MethodInfo(author = "hhh")
-    public static void test(){
+    public static void test() {
 
     }
 }

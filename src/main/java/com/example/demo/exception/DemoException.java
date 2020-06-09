@@ -6,7 +6,7 @@ package com.example.demo.exception;
 public class DemoException extends AutoException {
 
 
-    public DemoException(String message){
+    public DemoException(String message) {
         super(message);
         this.message = message;
     }

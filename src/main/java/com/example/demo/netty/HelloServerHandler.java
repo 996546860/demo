@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 public class HelloServerHandler extends ChannelInboundHandlerAdapter {
 
 
-
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         try {
@@ -26,7 +25,7 @@ public class HelloServerHandler extends ChannelInboundHandlerAdapter {
             System.out.println("初始化加载netty");
             System.out.println(CharsetUtil.UTF_8);
 
-        }finally {
+        } finally {
 
             ReferenceCountUtil.release(msg);
 
@@ -34,11 +33,10 @@ public class HelloServerHandler extends ChannelInboundHandlerAdapter {
     }
 
 
-
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-            cause.printStackTrace();
-            ctx.close();
+        cause.printStackTrace();
+        ctx.close();
     }
 
 }

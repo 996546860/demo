@@ -2,8 +2,9 @@ package com.example.demo;
 
 public class Finalization {
     public static Finalization finalization;
+
     @Override
-    protected void finalize(){
+    protected void finalize() {
         System.out.println("Finalized");
         finalization = this;
     }
@@ -17,7 +18,7 @@ public class Finalization {
             System.out.println("正在休息");
             Thread.currentThread().sleep(1000);
             System.out.println("休息结束");
-        } catch (InterruptedException e){
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
         System.out.println("Second print: " + f);

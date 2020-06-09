@@ -7,17 +7,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
-@Service(value="numberServicel")
-public class numberService  {
+@Service(value = "numberServicel")
+public class numberService {
 
 
-
-    public int getNumber(){
+    public int getNumber() {
         return 1;
     }
 
     @Transactional
-    public int delNumber(number num){
+    public int delNumber(number num) {
         return 1;
     }
 

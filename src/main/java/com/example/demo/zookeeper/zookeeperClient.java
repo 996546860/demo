@@ -11,29 +11,31 @@ import javax.annotation.Resource;
 public abstract class zookeeperClient {
 
 
-    /** 至少锁60秒 */
+    /**
+     * 至少锁60秒
+     */
     private static final long LOCK_MIN_TIME = 60000;
 
 
     @Resource
     private zookeeperLock zLock;
 
-    public void run(){
+    public void run() {
         InterProcessMutex lock = zLock.getLock(getClass().getSimpleName() + "/lock", 1);
-        if(lock == null){
+        if (lock == null) {
             System.err.println("can not get zookeeper lock ");
-            return ;
+            return;
         }
         long st = System.currentTimeMillis();
         System.out.println("任务开始 ... ");
 
-        try{
+        try {
             process();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("任务失败 ... ");
-        }finally {
+        } finally {
             long cost = System.currentTimeMillis() - st;
-            System.out.println("......执行时间"+cost);
+            System.out.println("......执行时间" + cost);
 
         }
     }

@@ -33,11 +33,11 @@ public class EmailUtils {
     private static String authName;
     private static String password;
     private static boolean isSSL;
-    private static String charset ;
+    private static String charset;
     private static String timeout;
 
     @PostConstruct
-    public void initParam () {
+    public void initParam() {
         auth = env.getProperty("mail.smtp.auth");
         host = env.getProperty("mail.host");
         protocol = env.getProperty("mail.transport.protocol");
@@ -48,21 +48,24 @@ public class EmailUtils {
         isSSL = env.getProperty("mail.is.ssl", Boolean.class);
         timeout = env.getProperty("mail.smtp.timeout");
     }
-    private  static int a;
+
+    private static int a;
     static List<Integer> list = new ArrayList<>();
     static CountDownLatch latch = new CountDownLatch(3);
 
 
-    public static synchronized void  to(){
+    public static synchronized void to() {
         a++;
         list.add(a);
     }
+
     /**
      * 发送邮件
-     * @param subject 主题
-     * @param toUsers 收件人
-     * @param ccUsers 抄送
-     * @param content 邮件内容
+     *
+     * @param subject     主题
+     * @param toUsers     收件人
+     * @param ccUsers     抄送
+     * @param content     邮件内容
      * @param attachfiles 附件列表  List<Map<String, String>> key: name && file
      */
     public static boolean sendEmail(String subject, String[] toUsers, String[] ccUsers, String content, List<Map<String, String>> attachfiles) {
@@ -79,7 +82,7 @@ public class EmailUtils {
             Properties properties = new Properties();
             properties.setProperty("mail.smtp.auth", auth);
             properties.setProperty("mail.smtp.timeout", timeout);
-            if(isSSL){
+            if (isSSL) {
                 MailSSLSocketFactory sf = null;
                 try {
                     sf = new MailSSLSocketFactory();

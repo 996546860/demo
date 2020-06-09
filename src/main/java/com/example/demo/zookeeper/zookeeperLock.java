@@ -27,10 +27,10 @@ public class zookeeperLock implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
         System.err.println("zookeeper建立连接..");
         try {
-            RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000,3);
-            client = CuratorFrameworkFactory.newClient(zooUrl,retryPolicy);
+            RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
+            client = CuratorFrameworkFactory.newClient(zooUrl, retryPolicy);
             client.start();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.err.println("zookeeper 启动失败 。。");
             System.out.println(e);
             throw e;
@@ -41,21 +41,22 @@ public class zookeeperLock implements InitializingBean {
 
     /**
      * 获取锁。返回不为null表示成功获取到锁，用完之后需要调用releaseLock方法释放
-     * @param lockPath 锁的相对路径，Not start with '/'
+     *
+     * @param lockPath    锁的相对路径，Not start with '/'
      * @param waitSeconds 等待秒数
      * @return 未获取到锁返回null
      */
-    public InterProcessMutex getLock(String lockPath,int waitSeconds){
+    public InterProcessMutex getLock(String lockPath, int waitSeconds) {
         InterProcessMutex lock = new InterProcessMutex(client, lockPathPrefix + lockPath);
-        try{
-            if(lock.acquire(waitSeconds, TimeUnit.SECONDS)){
+        try {
+            if (lock.acquire(waitSeconds, TimeUnit.SECONDS)) {
                 return lock;
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("get zookeeper lock error   ");
             System.out.println(e);
-        }finally {
+        } finally {
             releaseLock(lock);
         }
 
@@ -66,11 +67,11 @@ public class zookeeperLock implements InitializingBean {
     /**
      * 释放锁
      */
-    public void releaseLock(InterProcessMutex lock){
-        if(null!=lock && lock.isAcquiredInThisProcess()){
-            try{
+    public void releaseLock(InterProcessMutex lock) {
+        if (null != lock && lock.isAcquiredInThisProcess()) {
+            try {
                 lock.release();
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.out.println("remove zookeeper lock error   ");
                 System.out.println(e);
             }

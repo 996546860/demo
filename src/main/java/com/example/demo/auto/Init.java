@@ -25,7 +25,7 @@ import java.lang.annotation.*;
 *
 *
 * */
-@Target({ ElementType.FIELD, ElementType.METHOD })
+@Target({ElementType.FIELD, ElementType.METHOD})
 
 /*
 *

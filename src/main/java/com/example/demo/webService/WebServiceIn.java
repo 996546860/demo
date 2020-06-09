@@ -10,5 +10,5 @@ public interface WebServiceIn {
     String sayHello(String name);
 
     @WebMethod
-    String save(String name,String pwd);
+    String save(String name, String pwd);
 }

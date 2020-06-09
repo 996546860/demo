@@ -13,8 +13,7 @@ public class AutoException extends RuntimeException {
     String message;
 
 
-    public AutoException()
-    {
+    public AutoException() {
 
     }
 
@@ -34,8 +33,8 @@ public class AutoException extends RuntimeException {
 
 
     protected AutoException(String message, Throwable cause,
-                               boolean enableSuppression,
-                               boolean writableStackTrace) {
+                            boolean enableSuppression,
+                            boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 

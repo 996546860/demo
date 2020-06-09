@@ -1,6 +1,8 @@
 package com.example.demo.demo;
 
 public class User {
+
+    private String test = "111";
     private Integer id;
 
     private String userName;

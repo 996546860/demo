@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
         return userDao.selectByPrimaryKey(userId);
     }
 
-    public boolean addUser(User record){
+    public boolean addUser(User record) {
         boolean result = false;
         try {
             userDao.insertSelective(record);

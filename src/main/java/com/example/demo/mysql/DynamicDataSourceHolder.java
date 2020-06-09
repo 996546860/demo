@@ -16,24 +16,26 @@ public class DynamicDataSourceHolder {
 
     /**
      * 获取路由KEy
+     *
      * @return
      */
-    public static String getRouteKey(){
-       String routeKey =  threadLocal.get();
-       if(routeKey == null){
-           routeKey = DB_MASTER;
-       }
+    public static String getRouteKey() {
+        String routeKey = threadLocal.get();
+        if (routeKey == null) {
+            routeKey = DB_MASTER;
+        }
         return routeKey;
     }
 
     /**
      * 定义一个数据源
+     *
      * @param routeKey
      */
-    public static void setRouteKey(String routeKey){
+    public static void setRouteKey(String routeKey) {
         threadLocal.set(routeKey);
 
-        System.out.println("当前的数据源为: "+routeKey);
+        System.out.println("当前的数据源为: " + routeKey);
     }
 
 

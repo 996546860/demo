@@ -24,9 +24,9 @@ public class AnnotationParsing {
                         MethodInfo methodAnno = method.getAnnotation(MethodInfo.class);
 
                         if (DB.equals(method.getName()) && methodAnno.author().equals("vgj")) {
-                            System.out.println(method.getName()+ "当前的方法具有权限 - - "+ method.getName());
-                        }else{
-                            System.out.println(method.getName()+"无权限访问/"+methodAnno.author());
+                            System.out.println(method.getName() + "当前的方法具有权限 - - " + method.getName());
+                        } else {
+                            System.out.println(method.getName() + "无权限访问/" + methodAnno.author());
                         }
 
                         /*for (Annotation anno : method.getDeclaredAnnotations()) {
