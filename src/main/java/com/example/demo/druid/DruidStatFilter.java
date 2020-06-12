@@ -1,8 +1,5 @@
 package com.example.demo.druid;
 
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.annotation.WebInitParam;
-
 import com.alibaba.druid.support.http.WebStatFilter;
 
 /**

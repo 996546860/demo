@@ -1,10 +1,8 @@
 package com.example.demo.auto;
 
 import com.alibaba.fastjson.JSON;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.lang.reflect.Method;
 
 

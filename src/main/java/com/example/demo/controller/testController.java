@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.example.demo.demo.User;
 import com.example.demo.demo.number;
 import com.example.demo.service.UserService;
@@ -14,28 +13,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.Resource;
-import java.util.List;
 import java.util.Map;
 
 @Controller
 public class testController {
+
     @Autowired
     private UserService userService;
-
 
     @Autowired
     private numberService numberServicel;
 
-
     @RequestMapping("/showUser")
     @ResponseBody
     public User toIndex(Model model) {
-
         User user = this.userService.getUserById(1);
         return user;
     }
-
 
     @RequestMapping("sendEmail")
     public String sendEmail() throws Exception {

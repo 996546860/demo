@@ -2,9 +2,6 @@ package com.example.demo.druid;
 
 import com.alibaba.druid.support.http.StatViewServlet;
 
-import javax.servlet.annotation.WebInitParam;
-import javax.servlet.annotation.WebServlet;
-
 
 /**
  * @author 86176

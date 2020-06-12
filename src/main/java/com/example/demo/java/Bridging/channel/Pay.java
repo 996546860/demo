@@ -2,7 +2,6 @@ package com.example.demo.java.Bridging.channel;
 
 import com.example.demo.java.Bridging.model.IPayMode;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 

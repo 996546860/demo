@@ -1,8 +1,6 @@
 package com.example.demo.lru;
 
 import java.util.HashMap;
-import java.util.Map.Entry;
-import java.util.Set;
 
 
 public class LRUCache<K, V> {

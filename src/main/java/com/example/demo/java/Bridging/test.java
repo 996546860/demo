@@ -1,6 +1,5 @@
 package com.example.demo.java.Bridging;
 
-import com.example.demo.java.Bridging.channel.Pay;
 import com.example.demo.java.Bridging.channel.WxPay;
 import com.example.demo.java.Bridging.model.PayCypher;
 

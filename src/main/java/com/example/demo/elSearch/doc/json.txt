@@ -1,0 +1,24 @@
+{
+    "shardInfo": {
+        "total": 2,
+        "successful": 1,
+        "failures": [],
+        "failed": 0,
+        "fragment": false
+    },
+    "shardId": {
+        "index": {
+            "name": "book",
+            "uuid": "SlkVgAxgSbW5L8JVPzuWRQ",
+            "fragment": true
+        },
+        "id": 3,
+        "indexName": "book"
+    },
+    "id": "AXKnn452Y__EhUJXTEXy",
+    "type": "fzh",
+    "version": 1,
+    "result": "CREATED",
+    "index": "book",
+    "fragment": false
+}

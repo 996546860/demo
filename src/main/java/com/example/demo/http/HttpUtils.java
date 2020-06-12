@@ -1,7 +1,5 @@
 package com.example.demo.http;
 
-import java.util.Map;
-
 /**
  * dopost
  * doget

@@ -6,11 +6,13 @@ import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import sun.rmi.transport.Transport;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.util.Date;
 
 /**
  * @Author: fzh
@@ -30,9 +32,6 @@ public class esSerachController {
             XContentBuilder builder = XContentFactory.jsonBuilder()
                     .startObject()
                     .field("title", adds.getTitle())
-                    //.field("author", adds.getAuthor())
-                    //.field("wordCount", adds.getWordCount())
-                    //.field("pulishDate", new Date())
                     .endObject();
             IndexResponse indexResponse = this.client.prepareIndex("book", "fzh")
                     .setSource(builder)

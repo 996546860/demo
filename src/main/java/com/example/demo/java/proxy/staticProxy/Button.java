@@ -1,7 +1,5 @@
 package com.example.demo.java.proxy.staticProxy;
 
-import com.example.demo.java.proxy.staticProxy.IFunction;
-
 public class Button implements IFunction {
 
     private String btName;

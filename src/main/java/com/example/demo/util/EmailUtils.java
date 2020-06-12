@@ -13,7 +13,10 @@ import javax.annotation.PostConstruct;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
 import java.security.GeneralSecurityException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 
 /**
