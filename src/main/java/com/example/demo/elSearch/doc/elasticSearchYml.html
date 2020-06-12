@@ -1,0 +1,329 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="bin ：脚本文件，包括 ES 启动 &amp;amp; 安装插件等等 config ： elasticsearch.yml（ES 配置文件）、jvm.options（JVM 配置文件）、日志配置文件等等 J" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>elasticsearch.yml 配置项详解 - 晨曦_mxj - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.ico?v=20200522" type="image/x-icon" />
+
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=OkWhT11pACV4T_PiDJL8x9WKPwjvEyWNCWQ475DeMM0" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simplememory/bundle-simplememory.min.css?v=OL4qeo1LNGlN1rKIhv5UctANvt0M6Nx6kLzr_ffx3Xk" />
+
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-SimpleMemory-mobile.min.css" />
+
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/chenxi-mxj/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/chenxi-mxj/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/chenxi-mxj/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=kky26NpE8XcTG2noN8lCupDrGOFVIvUfmpq0A_0J4Lo"></script>
+    <script>
+        var currentBlogId = 538249;
+        var currentBlogApp = 'chenxi-mxj';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'SimpleMemory';
+    </script>
+
+
+
+</head>
+<body>
+<a name="top"></a>
+
+
+<!--done-->
+<div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            <a id="lnkBlogLogo" href="https://www.cnblogs.com/chenxi-mxj/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>
+
+            <!--done-->
+            <h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/chenxi-mxj/">晨曦_mxj</a>
+            </h1>
+            <h2>
+
+            </h2>
+
+
+
+
+
+        </div><!--end: blogTitle 博客的标题和副标题 -->
+        <div id="navigator">
+
+            <ul id="navList">
+                <li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+                    博客园</a>
+                </li>
+                <li>
+                    <a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/chenxi-mxj/">
+                        首页</a>
+                </li>
+                <li>
+
+                    <a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+                        新随笔</a>
+                </li>
+                <li>
+                    <a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E6%99%A8%E6%9B%A6_mxj">
+                        联系</a></li>
+                <li>
+                    <a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/chenxi-mxj/rss/">
+                        订阅</a>
+                    <!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+                <li>
+                    <a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+                        管理</a>
+                </li>
+            </ul>
+
+
+            <div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+27&nbsp; </span>
+                <span id="stats_article_count">文章 -
+0&nbsp; </span>
+                <span id="stats-comment_count">评论 -
+4</span>
+
+
+            </div><!--end: blogStats -->
+        </div><!--end: navigator 博客导航栏 -->
+    </div><!--end: header 头部 -->
+
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+                    <!--done-->
+                    <div id="topics">
+                        <div class="post">
+                            <h1 class = "postTitle">
+
+                                <a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/chenxi-mxj/p/12366407.html">elasticsearch.yml 配置项详解</a>
+
+                            </h1>
+                            <div class="clear"></div>
+                            <div class="postBody">
+
+                                <div id="cnblogs_post_body" class="blogpost-body ">
+                                    <p style="margin-left: 30px;">bin ：脚本文件，包括 ES 启动 &amp; 安装插件等等</p>
+                                    <p style="margin-left: 30px;">config ： elasticsearch.yml（ES 配置文件）、jvm.options（JVM 配置文件）、日志配置文件等等</p>
+                                    <p style="margin-left: 30px;">JDK ： 内置的 JDK，JAVA_VERSION=&ldquo;12.0.1&ldquo;</p>
+                                    <p style="margin-left: 30px;">lib ： 类库</p>
+                                    <p style="margin-left: 30px;">logs ： 日志文件</p>
+                                    <p style="margin-left: 30px;">modules ： ES 所有模块，包括 X-pack 等</p>
+                                    <p style="margin-left: 30px;">plugins ： ES 已经安装的插件。默认没有插件</p>
+                                    <p style="margin-left: 30px;">data ： ES 启动的时候，会有该目录，用来存储文档数据。该目录可以设置</p>
+                                    <div class="cnblogs_Highlighter">
+<pre class="brush:csharp;gutter:true;">cluster.name: elasticsearch
+# 配置的集群名称，默认是elasticsearch，es服务会通过广播方式自动连接在同一网段下的es服务，通过多播方式进行通信，同一网段下可以有多个集群，通过集群名称这个属性来区分不同的集群
+
+node.name: "Franz Kafka"
+# 当前配置所在机器的节点名
+
+node.master: true
+指定该节点是否有资格被选举成为node（注意这里只是设置成有资格),默认true
+
+node.data: true
+# 指定该节点是否存储索引数据，默认为true。
+
+index.number_of_shards: 5
+# 设置默认索引分片个数，默认为5片。7.X版本以上配置无效
+
+index.number_of_replicas: 1
+# 设置默认索引副本个数，默认为1个副本。7.x版本以上配置无效
+
+path.conf: /path/to/conf
+# 设置配置文件的存储路径，默认是es根目录下的config文件夹。
+
+path.data: /path/to/data
+# 设置索引数据的存储路径
+
+path.work: /path/to/work
+# 设置临时文件的存储路径
+
+path.logs: /path/to/logs
+# 设置日志文件的存储路径
+
+path.plugins: /path/to/plugins
+# 设置插件的存放路径
+
+network.bind_host: 192.168.0.1
+# 设置绑定的ip地址，可以是ipv4或ipv6的，默认为0.0.0.0，绑定这台机器的任何一个ip。
+
+network.publish_host: 192.168.0.1
+# 设置其它节点和该节点交互的ip地址，如果不设置它会自动判断，值必须是个真实的ip地址。
+
+network.host: 192.168.0.1
+# 这个参数是用来同时设置bind_host和publish_host上面两个参数。
+
+transport.tcp.port: 9300
+# 设置节点之间交互的tcp端口，默认是9300。
+
+transport.tcp.compress: true
+# 设置是否压缩tcp传输时的数据，默认为false，不压缩。
+
+http.port: 9200
+# 设置对外服务的http端口，默认为9200。
+
+http.max_content_length: 100mb
+# 设置内容的最大容量，默认100mb
+
+http.enabled: false
+# 是否使用http协议对外提供服务，默认为true，开启。
+
+gateway.type: local
+# gateway的类型，默认为local即为本地文件系统，可以设置为本地文件系统，分布式文件系统，hadoop的HDFS，和amazon的s3服务器等。
+
+
+cluster.routing.allocation.node_initial_primaries_recoveries: 4
+# 初始化数据恢复时，并发恢复线程的个数，默认为4。
+
+cluster.routing.allocation.node_concurrent_recoveries: 2
+# 添加删除节点或负载均衡时并发恢复线程的个数，默认为4。
+
+indices.recovery.max_size_per_sec: 0
+# 设置数据恢复时限制的带宽，如入100mb，默认为0，即无限制。
+
+indices.recovery.concurrent_streams: 5
+# 设置这个参数来限制从其它分片恢复数据时最大同时打开并发流的个数，默认为5。
+
+discovery.zen.minimum_master_nodes: 1
+# 设置这个参数来保证集群中的节点可以知道其它N个有master资格的节点。默认为1，对于大的集群来说，可以设置大一点的值（2-4）。7.x版本无效
+
+discovery.zen.ping.timeout: 3s
+# 设置集群中自动发现其它节点时ping连接超时时间，默认为3秒，对于比较差的网络环境可以高点的值来防止自动发现时出错。7.x版本无效
+
+discovery.zen.ping.multicast.enabled: false
+# 设置是否打开多播发现节点，默认是true。7.x版本无效
+
+discovery.zen.ping.unicast.hosts: ["host1", "host2:port", "host3[portX-portY]"]
+# 设置集群中master节点的初始列表，可以通过这些节点来自动发现新加入集群的节点。7.x版本无效
+
+discovery.seed_hosts 
+# 在启动此节点时传递要执行发现的主机的初始列表
+cluster.initial_master_nodes
+# 使用初始的一组符合主节点条件的节点引导集群
+</pre>
+                                    </div>
+                                    <p>　　</p>
+                                </div>
+                                <div id="MySignature"></div>
+                                <div class="clear"></div>
+                                <div id="blog_post_info_block">
+                                    <div id="blog_post_info"></div>
+                                    <div class="clear"></div>
+                                    <div id="post_next_prev"></div>
+                                </div>
+                            </div>
+                            <div class="postDesc">posted @
+                                <span id="post-date">2020-02-26 13:04</span>&nbsp;
+                                <a href="https://www.cnblogs.com/chenxi-mxj/">晨曦_mxj</a>&nbsp;
+                                阅读(<span id="post_view_count">...</span>)&nbsp;
+                                评论(<span id="post_comment_count">...</span>)&nbsp;
+                                <a href="https://i.cnblogs.com/EditPosts.aspx?postid=12366407" rel="nofollow">编辑</a>&nbsp;
+                                <a href="javascript:void(0)" onclick="AddToWz(12366407);return false;">收藏</a></div>
+                        </div>
+
+
+                    </div><!--end: topics 文章、评论容器-->
+                </div>
+                <script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+                <script>markdown_highlight();</script>
+                <script>
+                    var allowComments = true, cb_blogId = 538249, cb_blogApp = 'chenxi-mxj', cb_blogUserGuid = '14ab6f05-491f-4b4d-0255-08d72d75e5b2';
+                    var cb_entryId = 12366407, cb_entryCreatedDate = '2020-02-26 13:04', cb_postType = 1;
+                    loadViewCount(cb_entryId);
+                    loadSideColumnAd();
+                </script><a name="!comments"></a>
+                <div id="blog-comments-placeholder"></div>
+                <script>
+                    var commentManager = new blogCommentManager();
+                    commentManager.renderComments(0);
+                </script>
+
+                <div id="comment_form" class="commentform">
+                    <a name="commentform"></a>
+                    <div id="divCommentShow"></div>
+                    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+                    <div id="comment_form_container"></div>
+                    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+                    <div id="ad_t2"></div>
+                    <div id="opt_under_post"></div>
+                    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+                    <script>
+                        var googletag = googletag || {};
+                        googletag.cmd = googletag.cmd || [];
+                    </script>
+                    <script>
+                        googletag.cmd.push(function () {
+                            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+                            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+                            googletag.pubads().enableSingleRequest();
+                            googletag.enableServices();
+                        });
+                    </script>
+                    <div id="cnblogs_c1" class="c_ad_block">
+                        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+                    </div>
+                    <div id="under_post_news"></div>
+                    <div id="cnblogs_c2" class="c_ad_block">
+                        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;"></div>
+                    </div>
+                    <div id="under_post_kb"></div>
+                    <div id="HistoryToday" class="c_ad_block"></div>
+                    <script type="text/javascript">
+                        fixPostBody();
+                        deliverBigBanner();
+                        setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+                        deliverAdC1();
+                        deliverAdC2();
+                        loadNewsAndKb();
+                        loadBlogSignature();
+                        LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+                        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+                        loadOptUnderPost();
+                        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+                    </script>
+                </div>
+            </div><!--end: forFlow -->
+        </div><!--end: mainContent 主体内容容器-->
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+
+                <div id="sidebar_news" class="newsItem">
+                    <script>loadBlogNews();</script>
+                </div>
+
+                <div id="sidebar_ad"></div>
+                <div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+
+                <div id="leftcontentcontainer">
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                </div>
+
+            </div><!--end: sideBarMain -->
+        </div><!--end: sideBar 侧边栏容器 -->
+        <div class="clear"></div>
+    </div><!--end: main -->
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+        Copyright &copy; 2020 晨曦_mxj
+        <br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+</body>
+</html>

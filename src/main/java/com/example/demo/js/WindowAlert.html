@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body onbeforeunload="RunOnBeforeUnload()">
+
+</body>
+<script>
+    function RunOnBeforeUnload() {
+        window.event.returnValue = '关闭浏览器将退出系统.';
+    }
+</script>
+</html>
