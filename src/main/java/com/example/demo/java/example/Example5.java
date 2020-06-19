@@ -15,7 +15,10 @@ import static java.lang.System.out;
  *  4. 偏向锁 是无法保存hashCode的，对象头包括了  (锁信息)thread:23 | (阀值[目前认知批量重偏向和批量重撤销])epoch:2 | (年龄代)age:4 | (是否偏向)biased_lock:1 | lock:2 Biased
  *  5. 加入你调用了 对象.hashCode,那么对象头就会变为  identity_hashcode:25 | age:4 | biased_lock:1 | lock:2 |       Normal
  *                                             00000001 01101110 10100011 11000110 00011011 00000000 (对象头的信息 和 上面的描述是相反的) ，从对象头可以看出来，已经更新为无锁状态
+ *
+ *                                             epoch值 每进行一次 撤销 就+1
  */
+
 public class Example5 {
     static A a;
 

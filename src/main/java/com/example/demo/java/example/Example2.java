@@ -11,9 +11,10 @@ import static java.lang.System.out;
 public class Example2 {
 
     public static void main(String[] args) throws InterruptedException {
-        A a = new A();
+
 
         Thread.sleep(5000);
+        A a = new A();
         // TODO 00000001 00000000 00000000 00000000 当前状态是不可以偏向 无所
         out.println(ClassLayout.parseInstance(a).toPrintable()); // 无锁
 

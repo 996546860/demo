@@ -10,12 +10,20 @@ import java.util.concurrent.*;
  *                  offer 加入，不过可以判断 是否加入成功 以及 设置加入时间
  */
 public class BlockingQueueTest {
-    static BlockingQueue<String> queue = new LinkedBlockingQueue<>(); //无解队列 Integer.MAXVALUE
-                                         //new ArrayBlockingQueue<>(); // 有界队列
-                                         //new DelayQueue<>; // 延迟队列 需要百度学习
-    LinkedTransferQueue<String> queue1 = new LinkedTransferQueue<>(); // 百度学习一下
-                                        //new SynchronousQueue<>(); 容量始终为0 不能用add;
+    /***TODO 无解队列 Integer.MAXVALUE**/
+    static BlockingQueue<String> queue = new LinkedBlockingQueue<>();
+    /**
+     * TODO new ArrayBlockingQueue<>();  有界队列
+     * TODO new DelayQueue<>;  延迟队列 需要百度学习
+     * TODO new LinkedTransferQueue<>();  百度学习一下
+     * TODO new ArrayBlockingQueue<>();  有界队列
+     * TODO new DelayQueue<>;  延迟队列 需要百度学习
+     * TODO new LinkedTransferQueue<>(); 百度学习一下
+     * TODO new SynchronousQueue<>(); 容量始终为0 不能用add;
+     *
+     * */
     public static void main(String[] args) {
+        long time1 = System.currentTimeMillis();
         new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 try {
@@ -25,7 +33,6 @@ public class BlockingQueueTest {
                 }
             }
         }).start();
-
         new Thread(() -> {
             while (true) {
                 try {
@@ -36,5 +43,8 @@ public class BlockingQueueTest {
                 }
             }
         }).start();
+
+        long time2 = System.currentTimeMillis();
+
     }
 }

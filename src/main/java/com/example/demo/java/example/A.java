@@ -8,6 +8,6 @@ package com.example.demo.java.example;
 public class A {
 
     public synchronized void toDo() {
-        //this.hashCode();
+
     }
 }
