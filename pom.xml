@@ -37,6 +37,7 @@
         <quartz.version>2.3.2</quartz.version>
         <httpclient.version>4.5.8</httpclient.version>
         <httpmime.version>4.5.8</httpmime.version>
+        <jol-core.version>0.8</jol-core.version>
     </properties>
 
     <dependencies>
@@ -149,6 +150,11 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpmime</artifactId>
             <version>${httpmime.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jol</groupId>
+            <artifactId>jol-core</artifactId>
+            <version>${jol-core.version}</version>
         </dependency>
     </dependencies>
 

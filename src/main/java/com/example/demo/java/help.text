@@ -1,0 +1,16 @@
+参数名称
+PrintFlagsInitial
+
+取值类型
+boolean
+
+参数说明
+Print all VM flags before argument processing and exit VM
+
+用法及建议
+你可以通过-XX:+PrintFlagsInitial开启，或者-XX:-PrintFlagsInitial关闭
+
+intx BiasedLockingStartupDelay                 = 4000  (释义)偏置锁定启动延迟
+intx BiasedLockingBulkRebiasThreshold          = 20    (释义)偏置锁定批量重置阈值
+intx BiasedLockingBulkRevokeThreshold          = 40    (释义)偏置锁定批量撤销阈值
+intx BiasedLockingDecayTime                    = 25000 (释义)偏置锁定衰减时间
