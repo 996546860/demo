@@ -1,12 +1,11 @@
 package com.example.demo.java.Performance;
 
 import com.example.demo.java.example.A;
-import static java.lang.System.out;
-import org.checkerframework.checker.units.qual.C;
 
-import java.util.Timer;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import static java.lang.System.out;
 
 /**
  * @Author: fzh

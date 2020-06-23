@@ -1,10 +1,5 @@
 package com.example.demo.java.juc;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
-import java.util.concurrent.CopyOnWriteArrayList;
-
 /**
  * @Author: fzh
  * @Date: 2020/6/15 22:00

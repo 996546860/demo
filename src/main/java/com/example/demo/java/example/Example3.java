@@ -1,8 +1,8 @@
 package com.example.demo.java.example;
+
 import org.openjdk.jol.info.ClassLayout;
 
 import static java.lang.System.out;
-import static java.lang.System.err;
 /**
  * @Author: fzh
  * @Date: 2020/6/18 21:57

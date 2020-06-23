@@ -1,7 +1,5 @@
 package com.example.demo.java.juc;
 
-import com.sun.jmx.remote.internal.ArrayQueue;
-
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 

@@ -10,10 +10,60 @@ Print all VM flags before argument processing and exit VM
 用法及建议
 你可以通过-XX:+PrintFlagsInitial开启，或者-XX:-PrintFlagsInitial关闭
 
-intx BiasedLockingStartupDelay                 = 4000  (释义)偏置锁定启动延迟
-intx BiasedLockingBulkRebiasThreshold          = 20    (释义)偏置锁定批量重置阈值
-intx BiasedLockingBulkRevokeThreshold          = 40    (释义)偏置锁定批量撤销阈值
-intx BiasedLockingDecayTime                    = 25000 (释义)偏置锁定衰减时间
+intx BiasedLockingStartupDelay                 = 4000  (释义)偏置锁启动延迟
+intx BiasedLockingBulkRebiasThreshold          = 20    (释义)偏置锁批量重置阈值
+intx BiasedLockingBulkRevokeThreshold          = 40    (释义)偏置锁批量撤销阈值
+intx BiasedLockingDecayTime                    = 25000 (释义)偏置锁衰减时间
+
+补充(可能场景用不到,学术还是要的)：
+  1. java 并不存在单个锁重偏向，但是会从在锁批量重偏向 （因为 JVM 并不傻 ，如果把一个锁不停的通过CAS操作进行判断重偏向的话，
+  那么这部分的性能也是一部分很大的损耗，所以JVM直接把锁升级为轻量级锁，但是批量重偏向是一个很特殊的概念，因为 JVM对一个对象执行了很多次的加锁撤销加锁后，
+  达到了本身的阀值，接下来该对象的锁就不会进行升级，直接就是重偏向了
+  ）
+     1.1 java 中批量重偏向和批量撤销是针对类的优化，和对象无关。
+     1.2 java 当某个类已经触发批量撤销机制后，JVM会默认当前类产生了严重的问题，剥夺了该类的新实例对象使用偏向锁的权利
+
+  2. java 中线程的实现 是通过 java->jvm->os函数--->(cpu,内存)进行调度,并且sync加锁的本质是通过操作系统 pthread_lock 指令来的，所以十分的耗费性能，
+  sync的使用一定要考虑好场景，并不建议在大量线程竞争的情况下使用 ‘难道AQS还没有看的上吗’
+
+  3.通过JNI反向调用，才能用C层面了解，系统是如何调用我们的java线程
+
+  4.锁的CAS (Central Authentication Service)的含义
+
+  5.sync--jvm--操作系统--内核态--线程阻塞和唤醒
+
+优化篇：'-' 代表特殊之处 '()' 代表关键字
+前言【 在高负载多线程应用中性能是非常重要的。为了达到更好的性能，开发者必须意识到并发的重要性。当我们需要使用并发时， 常常有一个资源必须被两个或多个线程共享。
+   在这种情况下，就存在一个竞争条件，也就是其中一个线程可以得到锁（锁与特定资源绑定），其他想要得到锁的线程会被阻塞。这个同步机制的实现是有代价的，为了向你提供一个好用的同步模型，JVM和操作系统都要消耗资源。
+   有三个最重要的因素使并发的实现会消耗大量资源，它们是：
+   (1).上下文切换
+   (2).内存同步
+   (3).阻塞】
+
+1.并发性能优化 – (1)降低锁粒度
+  例1：
+       private Map dictionary = new HashMap();
+       public -(synchronized) void todo(String key, String value) {
+           long startTime = (new java.util.Date()).getTime();
+           value = value + "_"+startTime;
+           -(synchronized) {dictionary.put(key, value);}
+           System.out.println("I did this in "+ ((new java.util.Date()).getTime() - startTime)+" miliseconds");}
+
+1.并发性能优化 – (2)sync|lock
+    sync使用简单 sync(obj){};lock.lock() finall{lock.unlock}手动操作
+    sync 可以使用的场景 < lock
+    sync 是非公平锁; lock 是公平锁
+   例如2：lock可以正确的唤醒线程，一种策略
 
 
+AQS篇：
 
+   1. CountDownLatch(可以设置初始值,并且不可修改) 解析 latch.countDown()减一,latch.await()等待值为0
+     (1). 可以让线程按照要求顺序执行
+     (2). 等待所有线程执行结束，然后去做一件事
+   2. Semaphore 信号量
+     (1). 决定一次可以让几个线程运行
+   3. CyclicBarrier 根据定义的值，确定'值'个线程都准备好之后开始执行
+        |isBroken()如果因为构造或最后一次重置而导致中断或超时，从而使一个或多个参与者摆脱此 barrier，或者因为异常而导致某个屏障操作失败，则返回 true；否则返回 false
+        |reset()将屏障重置为其初始状态。如果所有参与者目前都在屏障处等待，则它们将返回，同时抛出一个 BrokenBarrierException。
+     (1). 例如固定线程池的放行,可以循环

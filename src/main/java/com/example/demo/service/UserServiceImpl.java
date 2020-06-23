@@ -13,10 +13,12 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
 
+    @Override
     public User getUserById(int userId) {
         return userDao.selectByPrimaryKey(userId);
     }
 
+    @Override
     public boolean addUser(User record) {
         boolean result = false;
         try {

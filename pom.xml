@@ -38,6 +38,7 @@
         <httpclient.version>4.5.8</httpclient.version>
         <httpmime.version>4.5.8</httpmime.version>
         <jol-core.version>0.8</jol-core.version>
+        <jsqlparser.version>3.1</jsqlparser.version>
     </properties>
 
     <dependencies>
@@ -152,9 +153,19 @@
             <version>${httpmime.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+        <dependency>
             <groupId>org.openjdk.jol</groupId>
             <artifactId>jol-core</artifactId>
             <version>${jol-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.jsqlparser</groupId>
+            <artifactId>jsqlparser</artifactId>
+            <version>${jsqlparser.version}</version>
         </dependency>
     </dependencies>
 

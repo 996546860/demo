@@ -1,6 +1,7 @@
 package com.example.demo.java.juc;
 
-import java.util.concurrent.*;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * @Author: fzh
