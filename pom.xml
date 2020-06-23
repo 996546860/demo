@@ -39,6 +39,7 @@
         <httpmime.version>4.5.8</httpmime.version>
         <jol-core.version>0.8</jol-core.version>
         <jsqlparser.version>3.1</jsqlparser.version>
+        <mybatis-plus.version>3.1.1</mybatis-plus.version>
     </properties>
 
     <dependencies>
@@ -155,7 +156,7 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.1.1</version>
+            <version>${mybatis-plus.version}</version>
         </dependency>
         <dependency>
             <groupId>org.openjdk.jol</groupId>
