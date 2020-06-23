@@ -1,4 +1,4 @@
-package com.example.demo.excel;
+package com.example.demo.util;
 
 import com.example.demo.exception.DemoException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -20,7 +20,8 @@ import java.util.concurrent.Future;
 
 
 /**
- * 自动读取 excel信息 返回 List<Map>
+ * 做一个 单线程/到县城的 excelUtils 导入导出的工具类,
+ * @Content: 正在准备中
  */
 public class ExcelUtils {
     static ExecutorService executors = Executors.newFixedThreadPool(20);
@@ -28,21 +29,7 @@ public class ExcelUtils {
     static CountDownLatch countDownLatch = new CountDownLatch(3);
 
     public static void main(String[] args) throws Exception {
-        /*executors.execute(() -> {
-            try {
-                ExcelUtils.readXLSX(new File("C:\\Users\\4607\\Desktop\\11.xlsx"));
-                countDownLatch.countDown();
-            } catch (InvalidFormatException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        countDownLatch.await();
-        System.out.println("等待結束...");
-        System.out.println(mapList);
-        System.out.println(JSON.toJSONString(mapList));*/
-        ExcelUtils.readXLSX(new File("C:\\Users\\4607\\Desktop\\11.xlsx"));
+        ExcelUtils.readXLSX(new File(""));
         countDownLatch.await();
         System.out.println("执行结束...");
         System.out.println(mapList);
