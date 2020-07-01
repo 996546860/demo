@@ -28,7 +28,7 @@
         <org.apache.poi.version>3.17</org.apache.poi.version>
         <com.sun.mail.version>1.6.0</com.sun.mail.version>
         <alibaba.fastjson.version>1.2.53</alibaba.fastjson.version>
-        <mysql.version>5.1.47</mysql.version>
+        <mysql.version>8.0.16</mysql.version>
         <spring.jpa.version>2.1.1.RELEASE</spring.jpa.version>
         <druid.version>1.1.12</druid.version>
         <zookeeper.vsersion>3.6.0</zookeeper.vsersion>
