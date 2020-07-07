@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import java.util.Properties;
 
 /**
- * @author lulu
+ * @author fzh
  * @Date 2019/6/8 12:18
  */
 @Configuration

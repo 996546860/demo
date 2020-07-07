@@ -1,4 +1,4 @@
-package com.example.demo.java.Bridging.model;
+package com.example.demo.java.DesignPatterns.Bridging.model;
 
 import lombok.extern.slf4j.Slf4j;
 

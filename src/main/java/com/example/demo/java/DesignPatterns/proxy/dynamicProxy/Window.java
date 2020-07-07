@@ -1,4 +1,4 @@
-package com.example.demo.java.proxy.dynamicProxy;
+package com.example.demo.java.DesignPatterns.proxy.dynamicProxy;
 
 public class Window implements IFunction {
 

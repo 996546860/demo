@@ -1,4 +1,4 @@
-package com.example.demo.java.proxy.dynamicProxy;
+package com.example.demo.java.DesignPatterns.proxy.dynamicProxy;
 
 public class test {
     public static void main(String[] args) {

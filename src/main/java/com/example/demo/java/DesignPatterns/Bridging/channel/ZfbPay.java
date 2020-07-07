@@ -1,6 +1,6 @@
-package com.example.demo.java.Bridging.channel;
+package com.example.demo.java.DesignPatterns.Bridging.channel;
 
-import com.example.demo.java.Bridging.model.IPayMode;
+import com.example.demo.java.DesignPatterns.Bridging.model.IPayMode;
 import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;

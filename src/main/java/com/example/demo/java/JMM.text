@@ -1,0 +1,26 @@
+ -- JMM【java Memory Model】java为了屏蔽操作系统和硬件之间的差异定的规则,一切的可见性不过是因为程序编译优化的问题
+        ---|"mesi中cpu强一致性,维护了各个线程的数据的共享,但是和Example9中的理念冲突了"|
+ -- HAPPENS-BEFORE 规则到底是什么?
+    1.单线程的情况下，下面的代码永远 happens-before 上面的
+      -- 因为在单线程的情况下，指令重拍，对结果不会有影响
+    2.多线程中的锁， unlock要hb lock
+      -- 多线程中规定了，解锁要在加锁之后，不再重排序
+    3. 如果操作A，操作volatile变量的写操作，操作B对同一个变量进行读操作，那么actionA Happen-before actionB
+    4. happen-before 具有传递性
+    x = 10
+    volatile y  = false
+    t1{
+        x= 40;
+        y = true;
+    }
+
+    t2{
+       if(y) {
+          sout(x);
+      }
+    }
+    sout--40
+    根据3，4原则，他t1对线程进行写操作，t2对线程进行读操作,写1_hb_读2,
+    那么t1_hb_t2
+
+    代码有一种是编译优化，和执行优化

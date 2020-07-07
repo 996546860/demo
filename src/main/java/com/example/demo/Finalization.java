@@ -10,7 +10,7 @@ public class Finalization {
     }
 
     public static void main(String[] args) {
-        Finalization f = new Finalization();
+        /*Finalization f = new Finalization();
         System.out.println("First print: " + f);
         f = null;
         System.gc();//异步
@@ -23,6 +23,6 @@ public class Finalization {
         }
         System.out.println("Second print: " + f);
         System.out.println(f.finalization);
-        System.out.println(f);
+        System.out.println(f);*/
     }
 }

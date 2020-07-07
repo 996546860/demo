@@ -1,4 +1,4 @@
-package com.example.demo.java.proxy.staticProxy;
+package com.example.demo.java.DesignPatterns.proxy.staticProxy;
 
 /**
  * 静态代理

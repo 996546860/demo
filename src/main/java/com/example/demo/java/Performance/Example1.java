@@ -4,6 +4,9 @@ import com.example.demo.java.example.A;
 
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import static java.lang.System.out;
 
@@ -33,10 +36,11 @@ import static java.lang.System.out;
  */
 public class Example1 {
     static A a = new A();
+    static Lock lock = new ReentrantLock();
 
     public static void main(String[] args) throws InterruptedException {
-        Thread.sleep(5000);
-        int threads = 30;
+        //Thread.sleep(5000);
+        int threads = 10;
         long millis1 = System.currentTimeMillis();
         CountDownLatch latch = new CountDownLatch(threads);
         AtomicInteger atomicInteger = new AtomicInteger(100000000);
@@ -124,7 +128,14 @@ public class Example1 {
         out.println("第一次单线程测试" +( millis2 - millis1));
     }
 
-    private static void dos() {
-        a.toDo();
+    private  static void dos() {
+        lock.lock();
+        try {
+
+        } catch (Exception e){
+        } finally {
+            lock.unlock();
+        }
+
     }
 }

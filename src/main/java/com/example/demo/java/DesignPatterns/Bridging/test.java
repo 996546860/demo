@@ -1,7 +1,7 @@
-package com.example.demo.java.Bridging;
+package com.example.demo.java.DesignPatterns.Bridging;
 
-import com.example.demo.java.Bridging.channel.WxPay;
-import com.example.demo.java.Bridging.model.PayCypher;
+import com.example.demo.java.DesignPatterns.Bridging.channel.WxPay;
+import com.example.demo.java.DesignPatterns.Bridging.model.PayCypher;
 
 import java.math.BigDecimal;
 
