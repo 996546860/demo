@@ -8,7 +8,7 @@ boolean
 Print all VM flags before argument processing and exit VM
 
 用法及建议
-你可以通过-XX:+PrintFlagsInitial开启，或者-XX:-PrintFlagsInitial关闭
+可以通过-XX:+PrintFlagsInitial开启，或者-XX:-PrintFlagsInitial关闭
 
 intx BiasedLockingStartupDelay                 = 4000  (释义)偏置锁启动延迟
 intx BiasedLockingBulkRebiasThreshold          = 20    (释义)偏置锁批量重置阈值
@@ -16,7 +16,7 @@ intx BiasedLockingBulkRevokeThreshold          = 40    (释义)偏置锁批量�
 intx BiasedLockingDecayTime                    = 25000 (释义)偏置锁衰减时间
 
 补充(可能场景用不到,学术还是要的)：
-  1. java 并不存在单个锁重偏向，但是会从在锁批量重偏向 （因为 JVM 并不傻 ，如果把一个锁不停的通过CAS操作进行判断重偏向的话，
+  1. java 并不存在单个锁重偏向，但是会存在锁批量重偏向 （因为 JVM 并不傻 ，如果把一个锁不停的通过CAS操作进行判断重偏向的话，
   那么这部分的性能也是一部分很大的损耗，所以JVM直接把锁升级为轻量级锁，但是批量重偏向是一个很特殊的概念，因为 JVM对一个对象执行了很多次的加锁撤销加锁后，
   达到了本身的阀值，接下来该对象的锁就不会进行升级，直接就是重偏向了
   ）

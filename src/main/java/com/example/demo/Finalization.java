@@ -1,15 +1,22 @@
 package com.example.demo;
 
+import com.example.demo.demo.User;
+import com.sun.corba.se.impl.resolver.SplitLocalResolverImpl;
+
+import java.util.function.Supplier;
+
 public class Finalization {
-    public static Finalization finalization;
+   /* public static Finalization finalization;
 
     @Override
     protected void finalize() {
         System.out.println("Finalized");
         finalization = this;
-    }
+    }*/
 
     public static void main(String[] args) {
+
+
         /*Finalization f = new Finalization();
         System.out.println("First print: " + f);
         f = null;
@@ -24,5 +31,17 @@ public class Finalization {
         System.out.println("Second print: " + f);
         System.out.println(f.finalization);
         System.out.println(f);*/
+        //上海 get certified
+
+            System.out.println("hi itstack-demo-agent-01");
+
+        //january
+        //Shanghai baiqiu e-commerce Co., Ltd
+    }
+
+
+    Object getString (Supplier<Object> supplier) {
+
+        return supplier.get();
     }
 }

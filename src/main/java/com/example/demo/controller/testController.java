@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.demo.User;
 import com.example.demo.demo.number;
-import com.example.demo.service.UserService;
+import com.example.demo.service.inteface.IFzh;
 import com.example.demo.zookeeper.DistributedLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,13 +17,13 @@ import java.util.Map;
 public class testController {
 
     @Autowired
-    private UserService userService;
+    IFzh iFzh;
 
     @RequestMapping("/showUser")
     @ResponseBody
     public User toIndex() {
-        User user = this.userService.getUserById(1);
-        return user;
+        iFzh.isRedis();
+        return new User();
     }
 
     @RequestMapping("sendEmail")

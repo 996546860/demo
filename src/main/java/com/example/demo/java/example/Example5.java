@@ -1,5 +1,6 @@
 package com.example.demo.java.example;
 
+import com.example.demo.java.A;
 import org.openjdk.jol.info.ClassLayout;
 
 import static java.lang.System.out;
@@ -24,7 +25,7 @@ public class Example5 {
 
     public static void main(String[] args) throws InterruptedException {
         /** TODO jvm 运行开始前因为有许多的同步方法要执行，所以延迟了偏向锁的开启 */
-        Thread.sleep(5000);
+        //Thread.sleep(5000);
         a = new A();
         out.println("before lock");
         out.println(ClassLayout.parseInstance(a).toPrintable());

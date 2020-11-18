@@ -49,7 +49,7 @@ public class ObjectProxy {
     private void validateLogin() {
         System.out.println("验证登录...");
         try {
-            Thread.sleep(3000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -59,7 +59,7 @@ public class ObjectProxy {
     private void validateRole() {
         System.out.println("验证角色...");
         try {
-            Thread.sleep(3000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

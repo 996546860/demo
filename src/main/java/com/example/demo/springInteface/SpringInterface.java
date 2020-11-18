@@ -1,5 +1,6 @@
 package com.example.demo.springInteface;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.Nullable;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * spring 拦截器实现 连接URL
  */
+
 @Configuration
 public class SpringInterface extends HandlerInterceptorAdapter {
 

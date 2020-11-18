@@ -1,0 +1,1 @@
+@Autowired 并不完全是 byName,byType,constructor,这几种是自动注入模型*模式,Autowired是一种注入的技术，先按照Name,Type依次查找

@@ -11,15 +11,13 @@ import java.util.concurrent.LinkedBlockingQueue;
  *                  offer 加入，不过可以判断 是否加入成功 以及 设置加入时间
  */
 public class BlockingQueueTest {
-    /***TODO 无解队列 Integer.MAXVALUE**/
+    /***TODO 无界队列 Integer.MAXVALUE**/
     static BlockingQueue<String> queue = new LinkedBlockingQueue<>();
     /**
      * TODO new ArrayBlockingQueue<>();  有界队列
      * TODO new DelayQueue<>;  延迟队列 需要百度学习
      * TODO new LinkedTransferQueue<>();  百度学习一下
      * TODO new ArrayBlockingQueue<>();  有界队列
-     * TODO new DelayQueue<>;  延迟队列 需要百度学习
-     * TODO new LinkedTransferQueue<>(); 百度学习一下
      * TODO new SynchronousQueue<>(); 容量始终为0 不能用add;
      *
      * */
@@ -28,7 +26,9 @@ public class BlockingQueueTest {
         new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 try {
+
                     queue.put("fzh"+i);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -37,7 +37,6 @@ public class BlockingQueueTest {
         new Thread(() -> {
             while (true) {
                 try {
-                    Thread.sleep(100);
                     System.out.println(queue.take());
                 } catch (InterruptedException e) {
                     e.printStackTrace();

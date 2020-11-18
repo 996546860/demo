@@ -26,6 +26,7 @@ public class Demo_Semaphore {
                 semaphore.release();
             }).start();
         }
+
         System.out.println("全部开始执行");
     }
 }

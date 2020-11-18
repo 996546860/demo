@@ -1,25 +1,37 @@
 package com.example.demo.demo;
 
-public class User {
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+
+import java.util.function.Supplier;
+
+@EqualsAndHashCode(callSuper = false)
+@Data
+@Accessors(chain = true)
+public class User{
 
 
     private Integer id;
 
     private String name;
 
-    public Integer getId() {
-        return id;
+    public  Integer getId() {
+        return this.id;
     }
 
-    public void setId(Integer id) {
+    public User setId(Integer id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public User setName(String name) {
         this.name = name;
+        return this;
     }
+
 }

@@ -18,7 +18,7 @@ import java.util.Properties;
  */
 @Configuration
 @Component
-@Slf4j
+
 //指定拦截哪些方法,update包括增删改
 @Intercepts(
         {
@@ -26,6 +26,7 @@ import java.util.Properties;
            @Signature(type = Executor.class, method = "update", args = {MappedStatement.class, Object.class})
         }
         )
+@Slf4j
 public class DynamicDataSourceInterceptor implements Interceptor {
     @Override
     public Object intercept(Invocation invocation) throws Throwable {

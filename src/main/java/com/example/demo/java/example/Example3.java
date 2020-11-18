@@ -1,5 +1,6 @@
 package com.example.demo.java.example;
 
+import com.example.demo.java.A;
 import org.openjdk.jol.info.ClassLayout;
 
 import static java.lang.System.out;
