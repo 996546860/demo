@@ -1,5 +1,6 @@
 package com.example.demo.java;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.*;
@@ -59,16 +60,7 @@ public class Test {
     }*/
 
     public static void main(String[] args) {
-        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(10, 20, 60L, TimeUnit.SECONDS, new LinkedBlockingQueue<>());
-
-        Thread t = new Thread(() -> {
-            System.out.println(Thread.currentThread().getName());
-        },"fzhg");
-        t.start();
-
-        for (int i = 0; i < 5; i++) {
-            threadPoolExecutor.execute(t);
-        }
+        System.out.println(1 <<4);
         /*HashMap map = new HashMap();
 
         //map.put(null,null);
