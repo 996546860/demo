@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>点名 · Roll Call</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #15241f;
+      --muted: #4a635a;
+      --paper: #f3f7f4;
+      --panel: rgba(255, 255, 255, 0.72);
+      --line: rgba(21, 36, 31, 0.12);
+      --accent: #c45c26;
+      --accent-deep: #9a3d12;
+      --teal: #1f6f5b;
+      --glow-soft: rgba(31, 111, 91, 0.18);
+      --radius: 18px;
+      --shadow: 0 18px 50px rgba(21, 36, 31, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+    }
+
+    body {
+      font-family: "Noto Sans SC", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 0%, #c8e4d8 0%, transparent 55%),
+        radial-gradient(ellipse 70% 50% at 90% 10%, #e8d5c4 0%, transparent 50%),
+        linear-gradient(165deg, #eaf3ee 0%, #f7f1ea 45%, #e4ebe7 100%);
+      background-attachment: fixed;
+    }
+
+    .noise {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      z-index: 0;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: clamp(1.5rem, 5vw, 3rem) 1.25rem 4rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    header {
+      text-align: center;
+      animation: rise 0.7s ease both;
+    }
+
+    .brand {
+      font-family: "ZCOOL XiaoWei", serif;
+      font-size: clamp(3rem, 12vw, 5.5rem);
+      line-height: 1;
+      letter-spacing: 0.08em;
+      margin: 0;
+      color: var(--ink);
+    }
+
+    .tagline {
+      margin: 0.75rem 0 0;
+      color: var(--muted);
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    .stage {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      animation: rise 0.7s ease 0.08s both;
+    }
+
+    .picked-label {
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .picked-label.visible {
+      opacity: 1;
+    }
+
+    .picked-name {
+      font-family: "ZCOOL XiaoWei", serif;
+      font-size: clamp(2.4rem, 10vw, 4.2rem);
+      min-height: 1.2em;
+      margin: 0;
+      color: var(--accent);
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .picked-name.spinning {
+      animation: pulse-name 0.12s ease infinite alternate;
+    }
+
+    .picked-name.landed {
+      animation: land 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1.75rem;
+    }
+
+    button {
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      padding: 0.85rem 1.6rem;
+      border-radius: 999px;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-primary {
+      background: var(--teal);
+      color: #fff;
+      box-shadow: 0 10px 28px var(--glow-soft);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: #185a4a;
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--line);
+    }
+
+    .btn-ghost:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.5);
+      color: var(--ink);
+    }
+
+    .panel {
+      background: var(--panel);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.35rem 1.25rem 1.5rem;
+      box-shadow: var(--shadow);
+      animation: rise 0.7s ease 0.16s both;
+    }
+
+    .panel h2 {
+      font-family: "ZCOOL XiaoWei", serif;
+      font-size: 1.45rem;
+      font-weight: 400;
+      margin: 0 0 0.25rem;
+    }
+
+    .hint {
+      margin: 0 0 1.1rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .add-row {
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .add-row input {
+      flex: 1;
+      min-width: 0;
+      font-family: inherit;
+      font-size: 1rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .add-row input:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px var(--glow-soft);
+    }
+
+    .add-row button {
+      flex-shrink: 0;
+      background: var(--ink);
+      color: #fff;
+      padding: 0.8rem 1.2rem;
+      border-radius: 12px;
+    }
+
+    .add-row button:hover:not(:disabled) {
+      background: #243d34;
+    }
+
+    .count {
+      margin: 0.85rem 0 0.6rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .count strong {
+      color: var(--teal);
+      font-weight: 700;
+    }
+
+    .name-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      min-height: 2.5rem;
+    }
+
+    .name-list:empty::after {
+      content: "还没有名字，先添加几位吧";
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .name-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.45rem 0.55rem 0.45rem 0.85rem;
+      background: rgba(31, 111, 91, 0.08);
+      border: 1px solid rgba(31, 111, 91, 0.15);
+      border-radius: 10px;
+      font-size: 0.95rem;
+      animation: chip-in 0.35s ease both;
+    }
+
+    .name-chip.is-picked {
+      background: rgba(196, 92, 38, 0.12);
+      border-color: rgba(196, 92, 38, 0.35);
+      color: var(--accent-deep);
+    }
+
+    .name-chip button {
+      padding: 0.15rem 0.45rem;
+      font-size: 0.85rem;
+      line-height: 1;
+      background: transparent;
+      color: var(--muted);
+      border-radius: 6px;
+    }
+
+    .name-chip button:hover {
+      background: rgba(21, 36, 31, 0.08);
+      color: var(--ink);
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes chip-in {
+      from {
+        opacity: 0;
+        transform: scale(0.92) translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    @keyframes pulse-name {
+      from {
+        opacity: 0.55;
+        transform: scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1.02);
+      }
+    }
+
+    @keyframes land {
+      0% {
+        transform: scale(1.18);
+        opacity: 0.4;
+      }
+      60% {
+        transform: scale(0.96);
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .add-row {
+        flex-direction: column;
+      }
+
+      .add-row button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="page">
+    <header>
+      <h1 class="brand">点名</h1>
+      <p class="tagline">自己加名字，随机点一位 · 最多 10 人</p>
+    </header>
+
+    <section class="stage" aria-live="polite">
+      <div class="picked-label" id="pickedLabel">本轮点到</div>
+      <p class="picked-name" id="pickedName">准备好了吗？</p>
+      <div class="actions">
+        <button type="button" class="btn-primary" id="rollBtn">开始点名</button>
+        <button type="button" class="btn-ghost" id="clearPickBtn">清空结果</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>名单</h2>
+      <p class="hint">输入姓名后点「添加」，名单会保存在本机浏览器里。</p>
+      <form class="add-row" id="addForm">
+        <input
+          type="text"
+          id="nameInput"
+          maxlength="20"
+          placeholder="输入姓名"
+          autocomplete="off"
+          aria-label="姓名"
+        />
+        <button type="submit" id="addBtn">添加</button>
+      </form>
+      <p class="count">已添加 <strong id="count">0</strong> / 10</p>
+      <ul class="name-list" id="nameList"></ul>
+    </section>
+  </div>
+
+  <script>
+    const MAX = 10;
+    const STORAGE_KEY = "roll-call-names-v1";
+
+    const nameInput = document.getElementById("nameInput");
+    const addForm = document.getElementById("addForm");
+    const addBtn = document.getElementById("addBtn");
+    const nameList = document.getElementById("nameList");
+    const countEl = document.getElementById("count");
+    const rollBtn = document.getElementById("rollBtn");
+    const clearPickBtn = document.getElementById("clearPickBtn");
+    const pickedName = document.getElementById("pickedName");
+    const pickedLabel = document.getElementById("pickedLabel");
+
+    let names = loadNames();
+    let rolling = false;
+    let lastPicked = null;
+
+    function loadNames() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed)
+          ? parsed.filter((n) => typeof n === "string" && n.trim()).slice(0, MAX)
+          : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function saveNames() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(names));
+    }
+
+    function render() {
+      countEl.textContent = String(names.length);
+      nameList.innerHTML = "";
+      names.forEach((name, index) => {
+        const li = document.createElement("li");
+        li.className = "name-chip" + (name === lastPicked ? " is-picked" : "");
+        const span = document.createElement("span");
+        span.textContent = name;
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.setAttribute("aria-label", "删除 " + name);
+        remove.textContent = "×";
+        remove.addEventListener("click", () => {
+          names.splice(index, 1);
+          if (lastPicked === name) lastPicked = null;
+          saveNames();
+          render();
+          syncButtons();
+        });
+        li.append(span, remove);
+        nameList.appendChild(li);
+      });
+      syncButtons();
+    }
+
+    function syncButtons() {
+      const full = names.length >= MAX;
+      addBtn.disabled = full || rolling;
+      nameInput.disabled = full || rolling;
+      rollBtn.disabled = names.length === 0 || rolling;
+      clearPickBtn.disabled = rolling;
+      if (full) {
+        nameInput.placeholder = "已满 10 人";
+      } else {
+        nameInput.placeholder = "输入姓名";
+      }
+    }
+
+    addForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (rolling || names.length >= MAX) return;
+      const value = nameInput.value.trim();
+      if (!value) return;
+      if (names.includes(value)) {
+        nameInput.focus();
+        nameInput.select();
+        return;
+      }
+      names.push(value);
+      saveNames();
+      nameInput.value = "";
+      render();
+      nameInput.focus();
+    });
+
+    clearPickBtn.addEventListener("click", () => {
+      if (rolling) return;
+      lastPicked = null;
+      pickedLabel.classList.remove("visible");
+      pickedName.classList.remove("landed", "spinning");
+      pickedName.textContent = "准备好了吗？";
+      pickedName.style.color = "";
+      render();
+    });
+
+    rollBtn.addEventListener("click", () => {
+      if (rolling || names.length === 0) return;
+      rolling = true;
+      syncButtons();
+      pickedLabel.classList.add("visible");
+      pickedName.classList.remove("landed");
+      pickedName.classList.add("spinning");
+      pickedName.style.color = "";
+
+      const duration = 1600 + Math.random() * 600;
+      const start = performance.now();
+      let lastIndex = -1;
+
+      function tick(now) {
+        const t = now - start;
+        if (t < duration) {
+          let next = Math.floor(Math.random() * names.length);
+          if (names.length > 1 && next === lastIndex) {
+            next = (next + 1) % names.length;
+          }
+          lastIndex = next;
+          pickedName.textContent = names[next];
+          requestAnimationFrame(tick);
+        } else {
+          const finalIndex = Math.floor(Math.random() * names.length);
+          lastPicked = names[finalIndex];
+          pickedName.textContent = lastPicked;
+          pickedName.classList.remove("spinning");
+          pickedName.classList.add("landed");
+          pickedName.style.color = "var(--accent)";
+          rolling = false;
+          render();
+        }
+      }
+
+      requestAnimationFrame(tick);
+    });
+
+    render();
+  </script>
+</body>
+</html>
